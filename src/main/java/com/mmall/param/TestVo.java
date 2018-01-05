@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class TestVo {
-    @NotBlank
+    @NotBlank(message = "i cant be null")
     private String msg;
     @NotNull(message = "id不可以为空")
     @Max(value = 10,message = "id不能大于10")

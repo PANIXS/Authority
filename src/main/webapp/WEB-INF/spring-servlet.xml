@@ -11,6 +11,9 @@
     <!--启动包扫描功能,说明这个包对哪些位置有效-->
     <context:component-scan base-package="com.mmall.controller"/>
     <context:component-scan base-package="com.mmall.service"/>
+
+    <bean class="com.mmall.common.ApplicationContextHelper" lazy-init="false"/>
+
     <!--告诉@RequestMapping去哪里找相应代码-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
     <!--将自定义的异常处理交给Spring管理-->

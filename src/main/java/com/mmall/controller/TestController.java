@@ -2,10 +2,14 @@ package com.mmall.controller;
 
 
 
+import com.mmall.common.ApplicationContextHelper;
 import com.mmall.common.JsonData;
+import com.mmall.dao.SysAclModuleMapper;
 import com.mmall.exception.ParamException;
+import com.mmall.model.SysAclModule;
 import com.mmall.param.TestVo;
 import com.mmall.util.BeanValidator;
+import com.mmall.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,8 @@ import java.util.Map;
 @Slf4j
 public class TestController {
 
+    private SysAclModule module;
+
     @RequestMapping("/hello.json")
     @ResponseBody
     public JsonData  hello(){
@@ -30,17 +36,10 @@ public class TestController {
     @ResponseBody
     public JsonData validate(TestVo vo)throws ParamException{
         log.info("validate");
+        SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
+        SysAclModule module= moduleMapper.selectByPrimaryKey(1);
+        log.info(JsonMapper.obj2String(module));
         BeanValidator.check(vo);
-        try {
-            Map<String, String> map = BeanValidator.validateObject(vo);
-            if (MapUtils.isNotEmpty(map)) {
-                for (Map.Entry<String, String> entry : map.entrySet()) {
-                    log.info("{}->{}", entry.getKey(), entry.getValue());
-                }
-            }
-        }catch (Exception e){
-
-        }
         return JsonData.success("test validate");
     }
 
