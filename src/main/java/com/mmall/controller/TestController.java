@@ -43,5 +43,5 @@ public class TestController {
         }
         return JsonData.success("test validate");
     }
-    public void Tetet(){}
+
 }
