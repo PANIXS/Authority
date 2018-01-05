@@ -1,1 +1,5 @@
-**/lib/*.jar
+#**/lib/*.jar
+
+.idea/
+target/
+
