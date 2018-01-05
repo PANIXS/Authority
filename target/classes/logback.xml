@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--scan : 当配置文件发生改变,会自动进行加载-->
+<!--scanPeriod:配置文件是否有修改的时间间隔,默认毫秒单位,scan为true时才生效-->
+<configuration scan="true" scanPeriod="60 seconds">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder><!--配置日志的输出格式,"%-5level 相当于从左空5格,好对齐"-->
+        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread]  %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+<!--    <appender name="permission" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/permission.log</file>&lt;!&ndash;输出到tomcat目录下的文件&ndash;&gt;
+        &lt;!&ndash;指定压缩规则&ndash;&gt;
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${catalina.home}/logs/permission.%d{yyyy-MM-dd}.log.gz</FileNamePattern>&lt;!&ndash;指定压缩后的名字&ndash;&gt;
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">&lt;!&ndash;输出格式&ndash;&gt;
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread]  %-5level %logger - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    &lt;!&ndash;给一个logger指定appender&ndash;&gt;
+    <logger name="xxx" level="INFO">
+        <appender-ref ref="permission"/>
+    </logger>-->
+
+
+    <!--TRACE < DEBUG <INFO < WARNING <ERROR-->
+    <root level = "INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
