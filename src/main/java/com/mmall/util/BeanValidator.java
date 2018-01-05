@@ -4,10 +4,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mmall.exception.ParamException;
-import com.sun.xml.internal.ws.policy.PolicyMapUtil;
 import org.apache.commons.collections.MapUtils;
 
-import javax.print.DocFlavor;
 import javax.validation.*;
 import java.util.*;
 
