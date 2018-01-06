@@ -42,6 +42,5 @@ public class TestController {
         BeanValidator.check(vo);
         return JsonData.success("test validate");
     }
-    public void hh(){}
 
 }
