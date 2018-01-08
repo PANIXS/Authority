@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>500</title>
+    <title>无权限访问</title>
     <jsp:include page="/common/backend_common.jsp"/>
 </head>
 <body class="no-skin" youdao="bind" style="background: white">
@@ -18,21 +18,23 @@
                         <h1 class="grey lighter smaller">
                             <span class="blue bigger-125">
                                 <i class="ace-icon fa fa-random"></i>
-                                500
+                                无权限访问
                             </span>
-                            服务器内部错误
                         </h1>
 
                         <hr>
                         <h3 class="lighter smaller">
-                            我们正在修复它
-                            <i class="ace-icon fa fa-wrench icon-animated-wrench bigger-125"></i>
+                            一定是哪里姿势不对了~
                         </h3>
 
                         <div class="space"></div>
                         <div>
-                            <h4 class="lighter smaller">与此同时, 可以尝试以下:</h4>
+                            <h4 class="lighter smaller">可以尝试以下:</h4>
                             <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                                <li>
+                                    <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                    检查输入的页面地址
+                                </li>
                                 <li>
                                     <i class="ace-icon fa fa-hand-o-right blue"></i>
                                     阅读FAQ
@@ -40,7 +42,7 @@
 
                                 <li>
                                     <i class="ace-icon fa fa-hand-o-right blue"></i>
-                                    联系管理员,说明问题
+                                    联系管理员开通权限
                                 </li>
                             </ul>
                         </div>
