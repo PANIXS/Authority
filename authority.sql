@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 08/01/2018 19:06:34
+ Date: 09/01/2018 16:27:41
 */
 
 SET NAMES utf8mb4;
@@ -77,8 +77,8 @@ CREATE TABLE `sys_dept`  (
 -- ----------------------------
 INSERT INTO `sys_dept` VALUES (1, '技术部', 0, '0', 1, '技术部', 'system', '2018-01-08 14:06:28', '127.0.0.1');
 INSERT INTO `sys_dept` VALUES (2, '后端开发', 1, '0.1', 1, '后端', 'system', '2018-01-08 18:58:35', '127.0.0.1');
-INSERT INTO `sys_dept` VALUES (3, '前端开发', 1, '0.1', 2, '', 'system', '2018-01-08 14:37:54', '127.0.0.1');
-INSERT INTO `sys_dept` VALUES (4, 'UI设计', 1, '0.1', 3, '', 'system', '2018-01-08 18:57:54', '127.0.0.1');
+INSERT INTO `sys_dept` VALUES (3, '前端开发', 1, '0.1', 2, '', 'system', '2018-01-09 15:36:37', '127.0.0.1');
+INSERT INTO `sys_dept` VALUES (4, 'UI设计', 1, '0.1', 3, '', 'system', '2018-01-09 15:36:06', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -149,7 +149,7 @@ CREATE TABLE `sys_user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户名称',
   `telephone` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '手机号',
-  `mail` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户邮箱',
+  `mail` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户邮箱',
   `password` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '加密后的密码',
   `dept_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户所在部门的id',
   `status` int(11) NOT NULL DEFAULT 1 COMMENT '状态, 1:正常, 0:冻结, 2:删除',
@@ -158,6 +158,11 @@ CREATE TABLE `sys_user`  (
   `operate_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
   `operate_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '最后一次更新者的ip地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES (1, 'admin', '18612344321', 'admin@qq.com', '25D55AD283AA400AF464C76D713C07AD', 1, 1, 'admin', 'system', '2018-01-09 12:02:02', '127.0.0.1');
 
 SET FOREIGN_KEY_CHECKS = 1;
