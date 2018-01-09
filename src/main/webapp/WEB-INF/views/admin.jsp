@@ -1,5 +1,3 @@
-<%@ page import="com.mmall.common.RequestHolder" %>
-<%@ page import="com.mmall.model.SysUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="/admin/page.do" class="navbar-brand">
+            <a href="/admin/page.page" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     管理员控制台
@@ -81,7 +79,7 @@
 
         <ul class="nav nav-list">
             <li class="active">
-                <a class="popstyle" href="/sys/user/page.do" target="_blank">
+                <a class="popstyle" href="/sys/user/page.page" target="_blank">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> 首页 </span>
                 </a>
@@ -112,7 +110,7 @@
                         <b class="arrow"></b>
                     </li>
                     <li class="">
-                        <a class="popstyle" href="/sys/aclModule/acl.page" target="_blank">
+                        <a class="popstyle" href="/sys/acl/acl.page" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             权限管理
                         </a>
