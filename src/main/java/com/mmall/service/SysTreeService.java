@@ -10,15 +10,17 @@ import com.mmall.dto.DeptLevelDto;
 import com.mmall.model.SysAclModule;
 import com.mmall.model.SysDept;
 import com.mmall.util.LevelUtil;
+import com.sun.tools.classfile.StackMap_attribute;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class SysTreeService {
@@ -29,6 +31,7 @@ public class SysTreeService {
 
     public List<AclModuleLevelDto> aclModuleTree(){
         List<SysAclModule> aclModuleList = sysAclModuleMapper.getAllAclModule();
+
      /*   List<AclModuleLevelDto> dtoList = Lists.newArrayList();
         for (SysAclModule aclModule:aclModuleList){
             dtoList.add(AclModuleLevelDto.adapt(aclModule));
@@ -36,6 +39,7 @@ public class SysTreeService {
         List<AclModuleLevelDto> dtoList = aclModuleList.stream()
                 .map(AclModuleLevelDto::adapt)
                 .collect(toList());
+
         return aclModuleListToTree(dtoList);
     }
     public List<AclModuleLevelDto> aclModuleListToTree(List<AclModuleLevelDto> dtoList){
@@ -44,18 +48,26 @@ public class SysTreeService {
         }
         Multimap<String,AclModuleLevelDto> levelAclModuleMap = ArrayListMultimap.create();
         List<AclModuleLevelDto> rootList = Lists.newArrayList();
-
-        for (AclModuleLevelDto dto:dtoList){
+       dtoList.stream().forEach(
+               a-> {
+                   levelAclModuleMap.put(a.getLevel(),a);
+                   if (LevelUtil.ROOT.equals(a.getLevel())) {
+                       rootList.add(a);
+                    }
+           });
+        /*for (AclModuleLevelDto dto:dtoList){
             levelAclModuleMap.put(dto.getLevel(),dto);
             if (LevelUtil.ROOT.equals(dto.getLevel())){
                 //取出首层元素
                 rootList.add(dto);
             }
-        }
+        }*/
+
         Collections.sort(rootList, comparing(SysAclModule::getSeq));
         transformAclModuleTree(rootList,LevelUtil.ROOT,levelAclModuleMap);
         return rootList;
     }
+    //就是递归的设置rootList里面的List(以前是空的),最后成为树
     public void transformAclModuleTree(List<AclModuleLevelDto> dtoList,String level,Multimap<String,AclModuleLevelDto> levelAclModuleMap){
         for (int i = 0; i < dtoList.size(); i++){
             AclModuleLevelDto dto = dtoList.get(i);
