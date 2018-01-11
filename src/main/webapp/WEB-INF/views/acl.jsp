@@ -307,7 +307,7 @@
 
         function updateAcl(isCreate, successCallback, failCallback) {
             $.ajax({
-                url: isCreate ? "/sys/aclModule/save.json" : "/sys/aclModule/update.json",
+                url: isCreate ? "/sys/acl/save.json" : "/sys/acl/update.json",
                 data: $("#aclForm").serializeArray(),
                 type: 'POST',
                 success: function(result) {
@@ -465,7 +465,7 @@
 
         function loadAclList(aclModuleId) {
             var pageSize = $("#pageSize").val();
-            var url = "/sys/aclModule/page.json?aclModuleId=" + aclModuleId;
+            var url = "/sys/acl/page.json?aclModuleId=" + aclModuleId;
             var pageNo = $("#aclPage .pageNo").val() || 1;
             $.ajax({
                 url : url,
@@ -528,7 +528,7 @@
                 e.stopPropagation();
                 var aclId = $(this).attr("data-id");
                 $.ajax({
-                    url: "/sys/acl/update.json",
+                    url: "/sys/acl/acls.json",
                     data: {
                         aclId: aclId
                     },

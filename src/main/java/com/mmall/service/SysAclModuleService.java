@@ -52,6 +52,8 @@ public class SysAclModuleService {
         after.setOperator(RequestHolder.getCurrentUser().getUsername());
         after.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
         after.setOperateTime(new Date());
+
+        updateWithChild(before,after);
     }
     @Transactional
     protected void updateWithChild(SysAclModule before,SysAclModule after){
