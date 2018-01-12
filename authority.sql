@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 09/01/2018 16:27:41
+ Date: 12/01/2018 17:11:20
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,15 @@ CREATE TABLE `sys_acl`  (
   `operate_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
   `operate_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '最后一个更新者的地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_acl
+-- ----------------------------
+INSERT INTO `sys_acl` VALUES (1, '20180112110721_97', '进入产品管理界面', 1, '/sys/product/product.page', 1, 1, 1, '', 'admin', '2018-01-12 11:08:49', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_acl` VALUES (2, '20180112111741_89', '查询产品列表', 1, '/sys/product/page.json', 2, 1, 2, '', 'admin', '2018-01-12 11:17:48', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_acl` VALUES (3, '20180112111834_81', '产品上架', 1, '/sys/product/online/json', 2, 1, 3, '', 'admin', '2018-01-12 11:21:06', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_acl` VALUES (4, '20180112111946_31', '产品下架', 1, '/sys/product/offline.json', 2, 1, 4, '', 'admin', '2018-01-12 11:23:06', '0:0:0:0:0:0:0:1');
 
 -- ----------------------------
 -- Table structure for sys_acl_module
@@ -53,7 +61,14 @@ CREATE TABLE `sys_acl_module`  (
   `operate_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次操作时间',
   `operate_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '最后一次更新操作者的IP地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_acl_module
+-- ----------------------------
+INSERT INTO `sys_acl_module` VALUES (1, '产品管理', 0, '0', 1, 1, '', 'admin', '2018-01-11 17:14:33', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_acl_module` VALUES (2, '订单管理', 0, '0', 2, 1, '', 'admin', '2018-01-12 08:34:28', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_acl_module` VALUES (3, '公告管理', 0, '0', 3, 1, '', 'admin', '2018-01-12 08:34:42', '0:0:0:0:0:0:0:1');
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -77,7 +92,7 @@ CREATE TABLE `sys_dept`  (
 -- ----------------------------
 INSERT INTO `sys_dept` VALUES (1, '技术部', 0, '0', 1, '技术部', 'system', '2018-01-08 14:06:28', '127.0.0.1');
 INSERT INTO `sys_dept` VALUES (2, '后端开发', 1, '0.1', 1, '后端', 'system', '2018-01-08 18:58:35', '127.0.0.1');
-INSERT INTO `sys_dept` VALUES (3, '前端开发', 1, '0.1', 2, '', 'system', '2018-01-09 15:36:37', '127.0.0.1');
+INSERT INTO `sys_dept` VALUES (3, '前端开发', 1, '0.1', 4, '', 'admin', '2018-01-11 17:25:18', '0:0:0:0:0:0:0:1');
 INSERT INTO `sys_dept` VALUES (4, 'UI设计', 1, '0.1', 3, '', 'system', '2018-01-09 15:36:06', '127.0.0.1');
 
 -- ----------------------------
@@ -111,7 +126,14 @@ CREATE TABLE `sys_role`  (
   `operate_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新的时间',
   `operate_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '最后一次更新者的IP地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES (1, '产品管理员', 1, 1, '电饭锅', 'admin', '2018-01-12 13:13:06', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_role` VALUES (2, '订单管理员', 1, 1, '', 'admin', '2018-01-12 13:07:05', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_role` VALUES (3, '公告管理员', 1, 1, '', 'admin', '2018-01-12 13:07:24', '0:0:0:0:0:0:0:1');
 
 -- ----------------------------
 -- Table structure for sys_role_acl
@@ -158,11 +180,12 @@ CREATE TABLE `sys_user`  (
   `operate_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次更新时间',
   `operate_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '最后一次更新者的ip地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '18612344321', 'admin@qq.com', '25D55AD283AA400AF464C76D713C07AD', 1, 1, 'admin', 'system', '2018-01-09 12:02:02', '127.0.0.1');
+INSERT INTO `sys_user` VALUES (1, 'admin', '18612344321', 'admin@qq.com', '25D55AD283AA400AF464C76D713C07AD', 1, 1, 'admin我是管理员', 'admin', '2018-01-10 16:37:12', '127.0.0.1');
+INSERT INTO `sys_user` VALUES (2, 'jimin', '13188887777', 'jimin@qq.com', '25D55AD283AA400AF464C76D713C07AD', 1, 1, 'test ramark crr', 'system', '2018-01-10 15:11:25', '127.0.0.1');
 
 SET FOREIGN_KEY_CHECKS = 1;
