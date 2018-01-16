@@ -42,5 +42,12 @@ public class SysUserController {
         return JsonData.success(result);
     }
 
+    @RequestMapping("acls.json")
+    @ResponseBody
+    public JsonData acls(@RequestParam("userId") int userId){
+        return JsonData.success();
+    }
+
+
 
 }

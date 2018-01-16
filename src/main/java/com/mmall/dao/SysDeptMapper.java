@@ -27,4 +27,7 @@ public interface SysDeptMapper {
     void batchUpdateLevel(@Param("sysDeptList") List<SysDept> sysDeptList);
 
     int countByNameAndParentId(@Param("parentId") Integer parentId,@Param("name") String name,@Param("id") Integer id);
+
+    //看哪个部门的parentId是这个部门,借此判断当前部门是否有子部门
+    int countByParentId(@Param("deptId") int deptId);
 }
