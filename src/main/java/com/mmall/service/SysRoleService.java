@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class SysRoleService {
 
@@ -72,7 +74,7 @@ public class SysRoleService {
         return sysRoleMapper.countByName(name, id) > 0;
     }
 
-    /*public List<SysRole> getRoleListByUserId(int userId) {
+    public List<SysRole> getRoleListByUserId(int userId) {
         List<Integer> roleIdList = sysRoleUserMapper.getRoleIdListByUserId(userId);
         if (CollectionUtils.isEmpty(roleIdList)) {
             return Lists.newArrayList();
@@ -92,11 +94,11 @@ public class SysRoleService {
         if (CollectionUtils.isEmpty(roleList)) {
             return Lists.newArrayList();
         }
-        List<Integer> roleIdList = roleList.stream().map(role -> role.getId()).collect(Collectors.toList());
+        List<Integer> roleIdList = roleList.stream().map(SysRole::getId).collect(toList());
         List<Integer> userIdList = sysRoleUserMapper.getUserIdListByRoleIdList(roleIdList);
         if (CollectionUtils.isEmpty(userIdList)) {
             return Lists.newArrayList();
         }
         return sysUserMapper.getByIdList(userIdList);
-    }*/
+    }
 }
