@@ -2,7 +2,6 @@ package com.mmall.service;
 
 import com.google.common.base.Joiner;
 import com.mmall.beans.CacheKeyConstants;
-import com.mmall.common.RedisPool;
 import com.mmall.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class SysCacheService {
                 shardedJedis = redisPool.instance();
                 shardedJedis.setex(cacheKey,timeoutSeconds,toSavedValue);
         }catch (Exception e){
-                log.error("save cache exception, prefix:{}, key:{}",prefix.name(), JsonMapper.obj2String(keys));
+                log.error("save cache exception, prefix:{}, key:{}",prefix.name(), JsonMapper.obj2String(keys),e);
         }finally {
             redisPool.safeClose(shardedJedis);
         }
@@ -44,6 +43,21 @@ public class SysCacheService {
             key +="_" + Joiner.on("_").join(keys);
         }
         return key;
+    }
+
+    public String getFromCache(CacheKeyConstants prefix,String... keys){
+        ShardedJedis shardedJedis = null;
+        String cacheKey = generateCacheKey(prefix,keys);
+        try{
+            shardedJedis = redisPool.instance();
+            String value = shardedJedis.get(cacheKey);
+            return value;
+        }catch (Exception e){
+            log.error("get from cache exception, prefix:{}, keys:{}",prefix.name(),JsonMapper.obj2String(keys),e);
+            return null;
+        }finally {
+            redisPool.safeClose(shardedJedis);
+        }
     }
 
 }
