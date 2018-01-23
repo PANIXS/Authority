@@ -67,8 +67,7 @@ public class SysLogService {
                 if (StringUtils.isBlank(sysLog.getNewValue())  || StringUtils.isBlank(sysLog.getOldValue())) {
                     throw new ParamException("新增和删除操作不做还原");
                 }
-                SysUser afterUser = JsonMapper.string2Obj(sysLog.getOldValue(), new TypeReference<SysUser>() {
-                });
+                SysUser afterUser = JsonMapper.string2Obj(sysLog.getOldValue(), new TypeReference<SysUser>() {});
                 afterUser.setOperator(RequestHolder.getCurrentUser().getUsername());
                 afterUser.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
                 afterUser.setOperateTime(new Date());
