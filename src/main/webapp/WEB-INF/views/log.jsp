@@ -88,6 +88,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <script id="logListTemplate" type="x-tmpl-mustache">
 {{#logList}}
