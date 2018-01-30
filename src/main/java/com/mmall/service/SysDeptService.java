@@ -66,12 +66,12 @@ public class SysDeptService {
             String newLevelPrefix = after.getLevel();
             String oldLevelPrefix = before.getLevel();
             if (!after.getLevel().equals(before.getLevel())){
-                List<SysDept> deptList = sysDeptMapper.getChildDeptListByLevel(before.getLevel());
+                List<SysDept> deptList = sysDeptMapper.getChildDeptListByLevel(before.getLevel()+"."+before.getId());
                 if (CollectionUtils.isNotEmpty(deptList)){
                     for (SysDept dept:deptList){
                         String level = dept.getLevel();
                         if (level.indexOf(oldLevelPrefix)==0){
-                            //将原来查出来的level逐个更新
+                            //将原来查出来的level逐个更新 0.1 -> 0.1.8     0.1.8+''   0.1.8->0.1     0.1+
                             level = newLevelPrefix+level.substring(oldLevelPrefix.length());
                             dept.setLevel(level);
                         }

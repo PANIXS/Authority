@@ -10,6 +10,7 @@ import javax.validation.*;
 import java.util.*;
 
 public class BeanValidator {
+    //hibernate验证框架
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
     public static <T> Map<String,String> validate(T t,Class... groups){
