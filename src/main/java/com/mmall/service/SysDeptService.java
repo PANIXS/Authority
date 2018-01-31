@@ -65,17 +65,24 @@ public class SysDeptService {
     protected void updateWithChild(SysDept before ,SysDept after){
             String newLevelPrefix = after.getLevel();
             String oldLevelPrefix = before.getLevel();
+            if(after.getLevel().contains(after.getId().toString())){//新的层级不能包含自己的id
+                throw new ParamException("抱歉,在下觉得你的层级关系不对");
+            }
             if (!after.getLevel().equals(before.getLevel())){
                 List<SysDept> deptList = sysDeptMapper.getChildDeptListByLevel(before.getLevel()+"."+before.getId());
                 if (CollectionUtils.isNotEmpty(deptList)){
                     for (SysDept dept:deptList){
                         String level = dept.getLevel();
                         if (level.indexOf(oldLevelPrefix)==0){
-                            //将原来查出来的level逐个更新 0.1 -> 0.1.8     0.1.8+''   0.1.8->0.1     0.1+
+                            //1.不能包含自己id,2 不能有重复id ->不能包含自己id
+                            //将原来查出来的level逐个更新 0.1 -> 0.1.8     0.1.8+''   0.1.8->0.1     0.1+s
                             level = newLevelPrefix+level.substring(oldLevelPrefix.length());
                             dept.setLevel(level);
                         }
                     }
+                /*    for(SysDept dept:deptList){
+                        sysDeptMapper.updateByPrimaryKey(dept);
+                    }*/
                     sysDeptMapper.batchUpdateLevel(deptList);
                 }
             }

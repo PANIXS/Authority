@@ -25,7 +25,12 @@
         <property name="minIdle" value="3"/>
         <property name="maxActive" value="20"/>
         <property name="maxWait" value="60000"/>
-        <property name="filters" value="stat,wall"/>
+        <property name="filters" value="stat"/>
+        <property name="proxyFilters">
+            <list>
+                <ref bean="wall-filter"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -52,7 +57,11 @@
         <property name="logSlowSql" value="true"/><!--记录下慢SQL-->
         <property name="mergeSql" value="true"/><!--如果sql是多行,则排成一行,好看-->
     </bean>
+    <bean id="myWallConfig" class="com.alibaba.druid.wall.WallConfig">
+        <property name="multiStatementAllow" value="true"/>
+    </bean>
     <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="config" ref="myWallConfig"/>
         <property name="dbType" value="mysql"/>
     </bean>
 </beans>
