@@ -13,7 +13,6 @@ import com.mmall.model.SysAcl;
 import com.mmall.model.SysAclModule;
 import com.mmall.model.SysDept;
 import com.mmall.util.LevelUtil;
-import com.sun.tools.classfile.StackMap_attribute;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -128,7 +127,7 @@ public class SysTreeService {
         }
         Multimap<String,AclModuleLevelDto> levelAclModuleMap = ArrayListMultimap.create();
         List<AclModuleLevelDto> rootList = Lists.newArrayList();
-       dtoList.stream().forEach(
+       dtoList.forEach(
                a-> {
                    levelAclModuleMap.put(a.getLevel(),a);
                    if (LevelUtil.ROOT.equals(a.getLevel())) {
@@ -171,29 +170,29 @@ public class SysTreeService {
         }
         return deptListToTree(dtoList);
     }
-    public List<DeptLevelDto> deptListToTree(List<DeptLevelDto> deptLevelList){
-        if (CollectionUtils.isEmpty(deptLevelList)){
+    public List<DeptLevelDto> deptListToTree(List<DeptLevelDto> deptLevelDtoList){
+        if (CollectionUtils.isEmpty(deptLevelDtoList)){
             return Lists.newArrayList();
         }
-        Multimap<String,DeptLevelDto> levelDeptMap = ArrayListMultimap.create();
+        Multimap<String,DeptLevelDto> deptLevelDtoMultimap = ArrayListMultimap.create();
         List<DeptLevelDto> rootList = Lists.newArrayList();
 
-        for (DeptLevelDto dto : deptLevelList){
-            levelDeptMap.put(dto.getLevel(),dto);
-            if (LevelUtil.ROOT.equals(dto.getLevel())){
+        for (DeptLevelDto dto : deptLevelDtoList){
+            deptLevelDtoMultimap.put(dto.getLevel(),dto);
+            if (LevelUtil.ROOT.equals(dto.getLevel())){/*不一定只有一棵树哦*/
                 rootList.add(dto);
             }
         }
         //按照seq从小到大排序
         Collections.sort(rootList, comparing(o -> o.getSeq()));
         //树形生成树
-        transformDeptTree(rootList,LevelUtil.ROOT,levelDeptMap);
+        transformDeptTree(rootList,LevelUtil.ROOT,deptLevelDtoMultimap);
         return rootList;
     }
-    public void transformDeptTree(List<DeptLevelDto> deptLevelList,String level,Multimap<String,DeptLevelDto> levelDeptMap){
-        for (int i=0; i<deptLevelList.size();i++){
+    public void transformDeptTree(List<DeptLevelDto> rootList, String level, Multimap<String,DeptLevelDto> levelDeptMap){
+        for (int i = 0; i< rootList.size(); i++){
             //遍历该层的每个元素
-            DeptLevelDto deptLevelDto = deptLevelList.get(i);
+            DeptLevelDto deptLevelDto = rootList.get(i);
             //处理当前层级的数据
             String nextLevel = LevelUtil.calculateLevel(level,deptLevelDto.getId());
             //处理下一层
