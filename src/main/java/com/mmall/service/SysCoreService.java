@@ -47,6 +47,12 @@ public class SysCoreService {
               }
               return sysAclMapper.getByIdList(aclIdList);
     }
+
+    /**
+     * 根据userId查出所有的权限对象
+     * @param userId
+     * @return
+     */
     public List<SysAcl> getUserAclList(int userId){
         if (isSuperAdmin()){
             return sysAclMapper.getAll();

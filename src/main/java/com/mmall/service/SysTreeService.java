@@ -111,17 +111,13 @@ public class SysTreeService {
     public List<AclModuleLevelDto> aclModuleTree(){
         List<SysAclModule> aclModuleList = sysAclModuleMapper.getAllAclModule();
 
-     /*   List<AclModuleLevelDto> dtoList = Lists.newArrayList();
-        for (SysAclModule aclModule:aclModuleList){
-            dtoList.add(AclModuleLevelDto.adapt(aclModule));
-        }*/
         List<AclModuleLevelDto> dtoList = aclModuleList.stream()
                 .map(AclModuleLevelDto::adapt)
                 .collect(toList());
 
         return aclModuleListToTree(dtoList);
     }
-    public List<AclModuleLevelDto> aclModuleListToTree(List<AclModuleLevelDto> dtoList){
+    private List<AclModuleLevelDto> aclModuleListToTree(List<AclModuleLevelDto> dtoList){
         if (CollectionUtils.isEmpty(dtoList)){
             return Lists.newArrayList();
         }
@@ -134,20 +130,13 @@ public class SysTreeService {
                        rootList.add(a);
                     }
            });
-        /*for (AclModuleLevelDto dto:dtoList){
-            levelAclModuleMap.put(dto.getLevel(),dto);
-            if (LevelUtil.ROOT.equals(dto.getLevel())){
-                //取出首层元素
-                rootList.add(dto);
-            }
-        }*/
 
         Collections.sort(rootList, comparing(SysAclModule::getSeq));
         transformAclModuleTree(rootList,LevelUtil.ROOT,levelAclModuleMap);
         return rootList;
     }
     //就是递归的设置rootList里面的List(以前是空的),最后成为树
-    public void transformAclModuleTree(List<AclModuleLevelDto> dtoList,String level,Multimap<String,AclModuleLevelDto> levelAclModuleMap){
+    private void transformAclModuleTree(List<AclModuleLevelDto> dtoList,String level,Multimap<String,AclModuleLevelDto> levelAclModuleMap){
         for (int i = 0; i < dtoList.size(); i++){
             AclModuleLevelDto dto = dtoList.get(i);
             String nextLevel = LevelUtil.calculateLevel(level,dto.getId());
